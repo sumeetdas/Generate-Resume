@@ -1,0 +1,9 @@
+include mixins.pug
+
+doctype html
+html
+	head
+		title #{resume.title}
+		+getStyle( resume.style, resume.newCssPath )
+	body
+		+getResume ()

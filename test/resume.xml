@@ -1,0 +1,149 @@
+<resume>
+
+<style>default</style>
+
+<intro>
+	<name>Sumeet Das</name>
+	<email>johndoe@mail.com</email>
+	<phone>+91-7894561230</phone>
+	<address></address>
+	<city>Hyderabad TS India</city>
+	<website>www.sumeetdas.me</website>
+</intro>
+
+<!-- New Section - Experience -->
+
+<section>
+	<name>EXPERIENCE</name>
+	<part>
+		<heading>Oracle India Pvt. Ltd.</heading>
+		<subHeading>Application Engineer</subHeading>
+		<period>July 2013 - Present</period>
+		<location>Hyderabad TS India</location>
+
+		<description>
+
+		* **ClinicalOne** *(April 2018 - Present)*
+			* Working on Oracle Randomization Service (ORS) microservice
+			* Responsibilities include creating new REST APIs, writing unit test cases, reviewing manual test plan and fixing Sonar issues
+			* Involved in writing API manual and automation test cases and executing them during HIP sprints
+			* Tech: Java, JEE, JPA, JAX-RS, git, Apache Tomcat, Oracle JET (which uses KnockoutJS), JMockit, Jenkins, Sonar, Eclipse IDE
+		* **ClearTrial** *(July 2013 - March 2018)*
+			* Developed a dashboard to display various runtime statistics
+			* Created custom reports requested by customers using JasperReports
+			* Worked with remote teams based in the USA and Australia and have experience in Scrum, an agile software development methodology
+			* Played a key role in migrating the app from Struts 1.1 to Spring 3 MVC
+			* Developed a module to create RFP Bid Grid - an excel sheet created at runtime using Apache POI
+			* Performed performance load testing using JMeter
+			* Developed and maintained ClearTrial's REST API by adding new APIs (as requested by customer) and writing unit test cases
+			* Tech: Java design patterns, JQuery, HTML, CSS, JasperReports, Oracle BI Publisher, Oracle WebLogic, IntelliJ Idea
+
+		</description>
+	</part>
+	
+	<part>
+		<heading>Sabre Holdings</heading>
+		<subHeading>Intern</subHeading>
+		<period>July 2012 - December 2012</period>
+		<location>Bangalore KA India</location>
+
+		<description>
+
+		* Developed Project Dashboard for GDS Ticketing Team at Sabre Holdings, Bangalore
+		* Web app capable of adding, updating and viewing projects, retrieving budget data from Excel
+		spreadsheets maintained by Project Managers and generating different types of reports in PDF
+		format on the fly
+		* Powered by Yii, a PHP open-source MVC framework, MySQL database, JQuery (a JavaScript library),
+		HTML5, CSS3 and various other open-source JavaScript and PHP libraries
+
+		</description>
+	</part>
+	
+	<part>
+		<heading>Bhilai Steel Plant</heading>
+		<subHeading>Summer Intern</subHeading>
+		<period>May 2011 - July 2011</period>
+		<location>Bhilai CG India</location>
+
+		<description>
+		
+		* Developed SMS module for C &amp; IT Department
+
+		</description>
+	</part>
+</section>
+
+<!-- New Section - Education -->
+
+<section>
+	<name>EDUCATION</name>
+	<part>
+		<heading>BITS Pilani - Pilani Campus</heading>
+		<subHeading>B.E. (Hons.) Electronics and Instrumentation</subHeading>
+		<period>Aug 2009 - June 2013</period>
+		<location>Pilani RJ 333031 India</location>
+
+		<description>
+
+		* Graduated with First Class Honors and a GPA of 7.61	
+		* Electives completed: Fuzzy Logic, Image Processing, Effective Public Speaking, Object Oriented Programming, International Relations
+		{{page-break}}
+
+		</description>
+	</part>
+</section>
+
+<!-- New Section - Key Personal Projects -->
+
+<section>
+	<name>PERSONAL PROJECTS</name>
+	<description>
+	**Meow Blogging Engine**
+	
+	* A blogging engine consisting of a REST API for querying and modifying flat-file blogs and a single page application (SPA) in the front-end
+	* Enables various search engine bots and scrapers of social networking sites like Facebook to retrieve several key metadata from the blog whilst allowing developers to use AngularJS in the front-end
+	* Links:
+		* Meow: The core blogging engine
+			* Link: https://github.com/sumeetdas/Meow
+		* Meow-BlogView: Angular module used by the Meow blogging engine to view blogs
+			* Link: https://github.com/sumeetdas/Meow-BlogView
+		* Meow-BlogEdit: Angular module used by the Meow blogging engine to edit blogs
+			* Link: https://github.com/sumeetdas/Meow-BlogEdit
+	  
+	**AngularJS-JWT-OAuth2-Demo**
+	
+	* An app to demonstrate OAuth2 authentication and front-end route authorization using JSON Web Token (JWT) and Angular UI Router.
+	* Link: https://github.com/sumeetdas/AngularJS-JWT-OAuth2-Demo
+	</description>
+</section>
+
+<!-- New Section - Other Information -->
+
+<section>
+	<name>SKILLS</name>
+	<description>
+
+	* Languages: Java, JavaScript, Bash, SQL, Python, Scala
+
+	* Knows about:
+		* JavaScript: Promises, AngularJS, NodeJS, ExpressJS, Angular-UI-Router, Gulp, Jasmine, Pug, KnockoutJS, Oracle JET
+		* Java: OOP, Design Patterns, JPA, JEE, JAX-RS, Spring MVC, Apache POI, Jersey, Mockito, JMockit, Selenium WebDriver, Jasper Reports
+		* Misc: Scrum, JIRA, LESS, Git, Twitter Bootstrap, Heroku, Jenkins, Sonar, Apache Tomcat
+		
+	* Operating System: Windows 7, Oracle Linux
+
+	</description>
+</section>
+
+<section>
+	<name>LINKS</name>
+	<description>
+		* [Personal Website - www.sumeetdas.me](http://www.sumeetdas.me)
+		* [GitHub - https://github.com/sumeetdas](https://github.com/sumeetdas)
+		* [HackerRank - https://www.hackerrank.com/SumeetDas](https://www.hackerrank.com/SumeetDas)
+		* [SPOJ - http://www.spoj.com/users/anton_chigurh](http://www.spoj.com/users/anton_chigurh)
+		* [LinkedIn - http://in.linkedin.com/in/sumeetdas1992](http://in.linkedin.com/in/sumeetdas1992)
+	</description>
+</section>
+
+</resume>

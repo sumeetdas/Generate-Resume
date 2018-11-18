@@ -1,0 +1,45 @@
+mixin partBlock ( part )
+	div.part
+		div.col25
+			b #{part.period}
+			br
+			em #{part.location}
+		div.col75
+			div.part-heading
+				b #{part.heading}
+				br
+				em #{part.subHeading}
+			div.res-description
+				// https://stackoverflow.com/questions/27107451/how-to-insert-raw-html-in-jade-file-not-include-external-html-file
+				// https://stackoverflow.com/questions/7402750/passing-html-elements-into-a-jade-file
+				| !{part.description}
+	if part.pageBreakAfter
+		div.page-break-after
+
+mixin getStyle ( styleName, newCssPath )
+	link( type="text/css", rel="stylesheet", href=newCssPath + "/page.css" )
+	link( type="text/css", rel="stylesheet", href=newCssPath + "/print.css", media="print" )
+mixin getResume ()
+	div#resume.container
+		
+		- const intro = resume.intro;
+		
+		if intro
+			div#res-header
+				h1 #{intro.name} 
+				p !{intro.info}
+		div.content
+			each section in resume.section
+				div.section
+					if section.name			
+						div.res-name #{section.name}
+				
+					if section.description			
+						div.res-description
+							| !{section.description}
+				
+					if section.part instanceof Array
+						each part in section.part
+							+partBlock ( part )
+					else if section.part
+						+partBlock ( section.part )

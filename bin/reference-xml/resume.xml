@@ -1,0 +1,55 @@
+<resume>
+
+<style><!-- style name. If this tag is not present, then the default theme would be used --></style>
+
+<cssDirPath><!-- path of your css files. To be used for storing resume css files. --></cssDirPath>
+
+<intro>
+	<name><!-- your name --></name>
+	<email><!-- your email address --></email>
+	<phone><!-- your phone number --></phone>
+	<address><!-- your address --></address>
+	<city><!-- city --></city>
+	<website><!-- your website url --></website>
+</intro>
+
+<!-- New Section - Work Experience -->
+
+<section>
+	<name><!-- section name --></name>
+	<part>
+		<heading><!-- heading --></heading>
+		<subHeading><!-- subHeading --></subHeading>
+		<period><!-- period --></period>
+		<location><!-- location --></location>
+
+		<description>
+
+		<!-- accepts markdown -->
+
+		</description>
+	</part>
+	
+	<part>
+		<!-- Same as above -->
+	</part>
+</section>
+
+<!-- New Section -->
+
+<section>
+	<!-- Same as above -->
+</section>
+
+<!-- New Section with description -->
+
+<section>
+	<name><!-- section name --></name>
+	<description>
+	
+	<!-- section description -->
+
+	</description>
+</section>
+
+</resume>
