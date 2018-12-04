@@ -1,6 +1,32 @@
-const marked = require('marked');
-const puppeteer = require('puppeteer');
+const pug = require('pug');
 const path = require('path');
+const marked = require('marked');
+const promise = require('bluebird');
+const puppeteer = require('puppeteer');
+
+const fs = promise.promisifyAll( require('fs-extra') );
+const parseXmlToJson = promise.promisify( require('xml2js').parseString );
+
+function readXml (filename)
+{
+	return fs.readFileAsync( filename );
+}
+
+function convertXmlToJson (xml)
+{
+	return parseXmlToJson (xml , { explicitArray: false });
+}
+
+function generateLinks ( pAddress, pType, pOpenInNewTab ) 
+{
+	if ( !pAddress )
+		return null;
+	
+	const link = "<a " + ( pOpenInNewTab ? "target='_blank' " : "" ) + 
+			"href='" + ( pType ? pType : "//" ) + pAddress + "'>" + pAddress + "</a>";
+	
+	return link;
+}
 
 function getIndentation ( pString )
 {
@@ -56,50 +82,63 @@ function convertMarkdownToHtml ( pJSON )
 	}
 }
 
-function generateLinks ( pAddress, pType, pOpenInNewTab ) 
+function hydrateJson (json)
 {
-	if ( !pAddress )
-		return null;
+	json.resume = (json && json.resume) || {};
+		
+	json.resume.title = ( json && json.resume && json.resume.title ) || 'Resume';
+		
+	json.resume.style = (json.resume.style || 'default');
+		
+	json.resume.cssDirPath = json.resume.cssDirPath || "";
+		
+	json.resume.newCssPath = path.join( json.resume.cssDirPath, json.resume.style );
+		
+	json.resume.intro = json.resume.intro || {};
+		
+	const intro = json.resume.intro;
+		
+	// https://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript
+	const introInfo = [ intro.address, intro.city, 
+	generateLinks ( intro.phone, "tel:" ), generateLinks ( intro.email, "mailto:" ), 
+	generateLinks ( intro.website, intro.website && 
+								   intro.website.indexOf(':') != -1 ? null : 'http://', true  ) 
+					  ].filter ( n => n ).join(' | ');
 	
-	const link = "<a " + ( pOpenInNewTab ? "target='_blank' " : "" ) + 
-			"href='" + ( pType ? pType : "//" ) + pAddress + "'>" + pAddress + "</a>";
+	json.resume.intro.info = introInfo;
 	
-	return link;
+	convertMarkdownToHtml ( json.resume );
+
+	return json;
 }
 
-// https://stackoverflow.com/questions/27936772/how-to-deep-merge-instead-of-shallow-merge
-// Answer: https://stackoverflow.com/a/37164538/1583813
-function isObject(item) 
+async function createHtmlWithCss (json)
 {
-  return (item && typeof item === 'object' && !Array.isArray(item) && item !== null);
-}
+	// https://stackoverflow.com/questions/25134232/how-to-properly-render-partial-views-and-load-javascript-files-in-ajax-using-ex
+	
+	if ( !fs.existsSync(json.resume.newCssPath) )
+	{
+		fs.mkdirSync(json.resume.newCssPath);
+	}
+	
+	const styleName = json.resume.style;
+	
+	var renderedHtml = pug.compileFile ( path.join(__dirname, 'styles', styleName, 'resume.pug' ) ) ( json );
+	
+	const currentWorkingDirectory = process.cwd();
+	
+	const resumeFileName = currentWorkingDirectory + '/resume.html';
 
-// return immutable object
-function mergeDeep(target, source) 
-{
-  let output = Object.assign({}, target);
-
-  if ( isObject(target) && isObject(source) ) 
-  {
-    Object.keys(source).forEach(key => {
-      if (isObject(source[key])) 
-	  {
-        if ( !(key in target) )
-		{
-			Object.assign(output, { [key]: source[key] });
-		}
-        else 
-		{
-			output[key] = mergeDeep(target[key], source[key]);
-		}
-      } 
-	  else 
-	  {
-        Object.assign(output, { [key]: source[key] });
-      }
-    });
-  }
-  return output;
+	// copy style files to defined cssPath or default location (inside current directory)
+	await fs.writeFileAsync( resumeFileName, renderedHtml );
+	
+	await fs.copy(path.join(__dirname, 'styles', styleName, 'page.css'), path.join(json.resume.newCssPath, 'page.css'));
+	
+	await fs.copy(path.join(__dirname, 'styles', styleName, 'print.css'), path.join(json.resume.newCssPath, 'print.css'));
+	
+	console.log ( 'Resume in HTML format has been generated!' );
+	
+	return json;
 }
 
 function getFileUrl ( relFilePath )
@@ -109,19 +148,26 @@ function getFileUrl ( relFilePath )
 	return encodeURI('file://' + pathName);
 }
 
-async function getPdf() 
+async function getPdf(json) 
 {
 	const browser = await puppeteer.launch();
     const page = await browser.newPage();
 	const fileUrl = getFileUrl( "resume.html" );
 	await page.goto( fileUrl );
-	await page.screenshot({path: 'example.png'});
-
-    return page.pdf({path: "Resume.pdf"});
+	
+    await page.pdf({path: "Resume.pdf"});
+	
+	await browser.close();
+	
+	console.log("Resume in PDF format has been generated!");
+	
+	return json;
 }
 
 module.exports = {
-	convertMarkdownToHtml: convertMarkdownToHtml,
-	generateLinks: generateLinks,
+	readXml: readXml,
+	convertXmlToJson: convertXmlToJson,
+	hydrateJson: hydrateJson,
+	createHtmlWithCss: createHtmlWithCss,
 	getPdf: getPdf
 }
