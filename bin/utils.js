@@ -1,8 +1,10 @@
 const pug = require('pug');
 const path = require('path');
+const juice = require('juice');
 const marked = require('marked');
 const promise = require('bluebird');
 const puppeteer = require('puppeteer');
+const HtmlDocx = require('html-docx-js');
 
 const fs = promise.promisifyAll( require('fs-extra') );
 const parseXmlToJson = promise.promisify( require('xml2js').parseString );
@@ -148,7 +150,7 @@ function getFileUrl ( relFilePath )
 	return encodeURI('file://' + pathName);
 }
 
-async function getPdf(json) 
+async function createPdf(json) 
 {
 	const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -164,10 +166,34 @@ async function getPdf(json)
 	return json;
 }
 
+async function createDocx (json)
+{
+	const currentWorkingDirectory = process.cwd();
+	
+	const resumeFileName = 'resume.html';
+	
+	const html = await fs.readFileAsync(resumeFileName, 'utf-8');
+	
+	const css = await fs.readFileAsync( path.join(json.resume.newCssPath, 'print.css'), 'utf-8' );
+	
+	const inlineCssHtml = juice.inlineContent(html, css);
+	
+	console.log(inlineCssHtml);
+	
+	const docx = HtmlDocx.asBlob( inlineCssHtml );
+
+	await fs.writeFileAsync('resume.docx', docx);
+	
+	console.log("Resume in DOCX format has been generated!");
+	
+	return json;
+}
+
 module.exports = {
 	readXml: readXml,
 	convertXmlToJson: convertXmlToJson,
 	hydrateJson: hydrateJson,
 	createHtmlWithCss: createHtmlWithCss,
-	getPdf: getPdf
+	createPdf: createPdf,
+	createDocx: createDocx
 }

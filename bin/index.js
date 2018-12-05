@@ -5,7 +5,8 @@ const readXml = utils.readXml;
 const convertXmlToJson = utils.convertXmlToJson;
 const hydrateJson = utils.hydrateJson;
 const createHtmlWithCss = utils.createHtmlWithCss;
-const getPdf = utils.getPdf;
+const createPdf = utils.createPdf;
+const createDocx = utils.createDocx;
 
 // first two arguments are the file path of node.exe (or node.sh) and 
 // file path of this bin/index.js file. Hence, we splice the argument list at index 2
@@ -23,8 +24,9 @@ if ( processArguments.length >= 1 )
 	.then( convertXmlToJson )
 	.then( hydrateJson )
 	.then( createHtmlWithCss )
-	.then( getPdf )
-	.catch( Error, (e) => console.error(e) );
+	.then( createPdf )
+	.then( createDocx )
+	.catch( Error, e => console.error(e) );
 }
 else 
 {

@@ -1,5 +1,5 @@
 {
-  "name": "GenerateResume",
+  "name": "generate-resume",
   "version": "1.0.0",
   "description": "This CLI will help you generate your resume in HTML and PDF.",
   "bin": {
@@ -11,26 +11,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sumeetdas/Generate-Responsive-Resume-HTML-PDF.git"
+    "url": "git+https://github.com/sumeetdas/Generate-Resume.git"
   },
   "keywords": [
-    "responsive",
     "resume",
     "html",
     "pdf",
     "xml",
-    "pug",
-    "jade"
+    "pug"
   ],
   "author": "Sumeet Das",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sumeetdas/Generate-Responsive-Resume-HTML-PDF/issues"
+    "url": "https://github.com/sumeetdas/Generate-Resume/issues"
   },
-  "homepage": "https://github.com/sumeetdas/Generate-Responsive-Resume-HTML-PDF#readme",
+  "homepage": "https://github.com/sumeetdas/Generate-Resume#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
     "fs-extra": "^7.0.0",
+    "html-docx-js": "^0.3.1",
+    "juice": "^5.0.1",
     "marked": "^0.3.6",
     "pug": "^2.0.0-rc.1",
     "puppeteer": "^1.10.0",
