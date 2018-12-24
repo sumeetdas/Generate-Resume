@@ -8,7 +8,7 @@ This CLI will help you generate your resume in HTML and PDF.
   ```
   npm install -g generate-resume
   ```
-2. Write your information in XML format and save it in some file, e.g. `resume.xml`. The schema can be found in `bin/reference-xml/resume.xml`.
+2. Write your information in XML format and save it in some file, e.g. `resume.xml`. The schema can be found in [bin/reference-xml/resume.xml](bin/reference-xml/resume.xml).
 
 3. Execute the following command: 
   ```
