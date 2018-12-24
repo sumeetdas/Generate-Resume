@@ -174,11 +174,11 @@ async function createDocx (json)
 	
 	const html = await fs.readFileAsync(resumeFileName, 'utf-8');
 	
-	const css = await fs.readFileAsync( path.join(json.resume.newCssPath, 'print.css'), 'utf-8' );
+	const css = await fs.readFileAsync( path.join(__dirname, 'styles', json.resume.style, 'word.css'), 'utf-8' );
 	
 	const inlineCssHtml = juice.inlineContent(html, css);
 	
-	console.log(inlineCssHtml);
+	await fs.writeFileAsync( 'inlineCssHtml.html', inlineCssHtml );
 	
 	const docx = HtmlDocx.asBlob( inlineCssHtml );
 
