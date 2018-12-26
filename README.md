@@ -17,3 +17,5 @@ This CLI will help you generate your resume in HTML and PDF.
 4. Your resume in HTML and PDF format will be generated in your current directory.
 
 The library uses templates written in Pug (erstwhile Jade) format.
+
+Demo: http://www.sumeetdas.me/resume
