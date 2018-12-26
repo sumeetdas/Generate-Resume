@@ -12,7 +12,7 @@ This CLI will help you generate your resume in HTML and PDF.
 
 3. Execute the following command: 
   ```
-  generate-resume <path-to-JSON-file>/resume.xml
+  generate-resume <path-to-XML-file>/resume.xml
   ```
 4. Your resume in HTML and PDF format will be generated in your current directory.
 
